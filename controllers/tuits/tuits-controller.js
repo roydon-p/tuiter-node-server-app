@@ -4,10 +4,18 @@ let tuits = posts;
 const createTuit = (req, res) => {
     const newTuit = req.body;
     newTuit._id = (new Date()).getTime()+'';
+    newTuit.userName = "Nasa";
+    newTuit.handle = "@nasa";
+    newTuit.profilepic = "nasalogo.png"
     newTuit.likes = 0;
+    newTuit.replies = 0;
+    newTuit.retuits = 0;
+    newTuit.time = "Just Now"
     newTuit.liked = false;
+    newTuit.dislikes = 0;
+    newTuit.disliked = false;
     tuits.push(newTuit);
-    res.json(newTuit);
+    res.json(tuits);
 }
 
 const findTuits  = (req, res) => {
@@ -19,7 +27,7 @@ const updateTuit = (req, res) => {
     const updates = req.body;
     const tuitIndex = tuits.findIndex((t) => t._id.toString() === tuitdIdToUpdate)
     tuits[tuitIndex] = {...tuits[tuitIndex], ...updates};
-    res.sendStatus(200);
+    res.json(tuits);
 }
 
 const deleteTuit = (req, res) => {
